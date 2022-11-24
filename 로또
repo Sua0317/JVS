@@ -1,0 +1,157 @@
+comLotto = new Array(6);
+userLotto = [1, 2, 3, 4, 5, 6];  // 유저 구매 로또
+comBonusLotto = 0;
+
+/* - 유저가 산 로또 번호 6개도 출력 */
+document.write("당신의 로또 번호: " + userLotto);
+document.write("<hr>");
+//추첨 번호 뽑기
+//todo 단, 중복 시 다시 번호 뽑기
+
+//랜덤번호 1 지정
+comLotto[0] = Math.floor(Math.random() * 45 + 1);
+document.write("첫번째 번호 : " + comLotto[0]);
+document.write("<hr>");
+
+//랜덤번호 2 지정
+while (true) {
+    comLotto[1] = Math.floor(Math.random() * 45 + 1); // 1 ~ n 까지 범위내에서 랜덤하게 숫자 하나 뽑아주는 애.
+    if (comLotto[0] == comLotto[1]) {
+        continue;
+    } else {
+        document.write("두번째 번호 : " + comLotto[1]);
+        document.write("<hr>");
+        break;
+    }
+}
+//랜덤번호 3 지정
+while (true) {
+    comLotto[2] = Math.floor(Math.random() * 45 + 1); // 1 ~ n 까지 범위내에서 랜덤하게 숫자 하나 뽑아주는 애.
+    if (comLotto[0] == comLotto[2]) {
+        continue;
+    } else if (comLotto[1] == comLotto[2]) {
+        continue;
+    } else {
+        document.write("세번째 번호 : " + comLotto[2]);
+        document.write("<hr>");
+        break;
+    }
+}
+
+//랜덤번호 4 지정
+while (true) {
+    comLotto[3] = Math.floor(Math.random() * 45 + 1); // 1 ~ n 까지 범위내에서 랜덤하게 숫자 하나 뽑아주는 애.
+    if (comLotto[0] == comLotto[3]) {
+        continue;
+    } else if (comLotto[1] == comLotto[3]) {
+        continue;
+    } else if (comLotto[2] == comLotto[3]) {
+        continue;
+    } else {
+        document.write("네번째 번호 : " + comLotto[3]);
+        document.write("<hr>");
+        break;
+    }
+}
+
+//랜덤번호 5 지정
+while (true) {
+    comLotto[4] = Math.floor(Math.random() * 45 + 1); // 1 ~ n 까지 범위내에서 랜덤하게 숫자 하나 뽑아주는 애.
+    if (comLotto[0] == comLotto[4]) {
+        continue;
+    } else if (comLotto[1] == comLotto[4]) {
+        continue;
+    } else if (comLotto[2] == comLotto[4]) {
+        continue;
+    } else if (comLotto[3] == comLotto[4]) {
+        continue;
+    } else {
+        document.write("다섯번째 번호 : " + comLotto[4]);
+        document.write("<hr>");
+        break;
+    }
+}
+
+//랜덤번호 6 지정
+while (true) {
+    comLotto[6] = Math.floor(Math.random() * 45 + 1); // 1 ~ n 까지 범위내에서 랜덤하게 숫자 하나 뽑아주는 애.
+    if (comLotto[0] == comLotto[5]) {
+        continue;
+    } else if (comLotto[1] == comLotto[5]) {
+        continue;
+    } else if (comLotto[2] == comLotto[5]) {
+        continue;
+    } else if (comLotto[3] == comLotto[5]) {
+        continue;
+    } else if (comLotto[3] == comLotto[5]) {
+        continue;
+    } else {
+        document.write("여섯번째 번호 : " + comLotto[5]);
+        document.write("<hr>");
+        break;
+    }
+}
+
+//보너스번호
+while(true){
+    comBonusLotto=Math.floor(Math.random()*45+1);
+    if(comLotto[0] == comBonusLotto){
+        continue;
+    } else if(comLotto[1] == comBonusLotto){
+        continue;
+    } else if(comLotto[2] == comBonusLotto){
+        continue;
+    } else if(comLotto[3] == comBonusLotto){
+        continue;
+    } else if(comLotto[4] == comBonusLotto){
+        continue;
+    } else if(comLotto[5] == comBonusLotto){
+        continue;
+    } else {
+        document.write("보너스 번호:"+comBonusLotto);
+        document.write("<hr>");
+        break;
+    }
+}
+
+/* 일치 수 비교 */
+var winningCount = 0;
+for(var i=0;i<userLotto.length;i++){
+    for(var j=0;j<comLotto.length;j++){
+        if(userLotto[i] == comLotto[j]){
+            document.write("하나 당첨");
+            document.write("<hr>");
+            winningCount++;
+        }
+    }
+}
+
+document.write("총 당첨된 갯수는 :"+winningCount);
+
+document.write("<hr>");
+/* 등수 출력 */
+var rank = "";
+switch(winningCount){
+    case 3:
+        rank = "5등입니다.";
+        break;
+    case 4:
+        rank = "4등입니다.";
+        break;
+    case 5:
+        rank = "3등입니다.";
+        //보너스 번호가 맞았는지 체크(이 3등 당첨자 만을 대상으로 하면 되므로)
+        for(var i=0;i<6;i++){
+            if(userLotto[i] == comBonusLotto){
+                rank = "2등입니다.";
+            }
+        }
+        break;
+    case 6:
+        rank = "1등입니다.";
+        break;
+    default:
+        rank = "꽝입니다."        
+        break;
+}
+document.write("등수: "+rank);
